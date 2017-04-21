@@ -7,26 +7,44 @@
 //
 
 import UIKit
+fileprivate struct Def {
+    static let collectionCellIdent = "ImageCollectionCell"
+    static let addPhotoCollectionCellIdent = "addPhotoCell"
+    static let sectionInsets = UIEdgeInsets(top: 10.0, left: 20.0, bottom: 10.0, right: 20.0)
+    static let itemsPerRow: CGFloat = 3
+    enum Section:Int{
+        case addPhoto = 0
+        case photos = 1
+    }
+}
 
-class AccidentReportViewController: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate  {
+class AccidentReportViewController: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     let picker = UIImagePickerController()
+    var imageArray = [UIImage]()
     
+    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var carRegTextField: UITextField!
     @IBOutlet weak var telTextField: UITextField!
     @IBOutlet weak var isAgreeSwitch: UISwitch!
     @IBOutlet weak var conformButton: UIButton!
-    @IBOutlet weak var photoButton: UIButton!
     
-    @IBOutlet weak var imageView: UIImageView!
+    var width : CGFloat?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.configNavigationBar()
         picker.delegate = self
         conformButton.layer.cornerRadius = conformButton.bounds.height / 2
+        
         // Do any additional setup after loading the view.
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        
+        width = collectionView.frame.width
+    }
     //MARK: Private Validation
     
     private func isValidTelephone(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool{
@@ -97,7 +115,9 @@ class AccidentReportViewController: UIViewController, UITextFieldDelegate,UIImag
     private func isValidName(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String)->Bool{
         
         let lengthName = 20
-        let setValid = CharacterSet.letters.inverted
+        var setValid = CharacterSet.letters
+        setValid.formUnion(CharacterSet.init(charactersIn: " "))
+        setValid.invert()
         let array = string.components(separatedBy: setValid)
         if array.count > 1{
             return false
@@ -142,17 +162,24 @@ class AccidentReportViewController: UIViewController, UITextFieldDelegate,UIImag
             return false
         }
     }
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        textField.underlined()
+        return true
+    }
     
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        //FIXE TO 
+        textField.deunderlined()
+        return true
+    }
     
     @IBAction func checkButtonState(){
         if telTextField.text?.characters.count != 0  && nameTextField.text?.characters.count != 0 && carRegTextField.text?.characters.count != 0 && isAgreeSwitch.isOn {
             self.conformButton.isEnabled = true
             conformButton.alpha = 1
-            print("button is enable")
         } else {
             self.conformButton.isEnabled = false
             conformButton.alpha = 0.5
-            print("button is disable")
         }
     }
     
@@ -162,9 +189,9 @@ class AccidentReportViewController: UIViewController, UITextFieldDelegate,UIImag
         guard let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage else {
             fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
         }
-        // Set photoImageView to display the selected image.
-        photoButton.setImage(selectedImage , for: UIControlState.normal)
-        self.imageView.image = selectedImage
+        // Set photoImageViewArray to display the selected image.
+        self.imageArray.append(selectedImage)
+        self.collectionView.reloadData()
         dismiss(animated: true, completion: nil)
     }
     
@@ -172,17 +199,22 @@ class AccidentReportViewController: UIViewController, UITextFieldDelegate,UIImag
         dismiss(animated: true, completion: nil)
     }
     
-    //MARK: - Action Button Photo
-    @IBAction func getPhotoFromLibrary(_ sender: Any) {
-        picker.allowsEditing = false
-        picker.modalPresentationStyle = .popover
-        picker.sourceType = .photoLibrary
-        picker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
-        present(picker, animated: true, completion: nil)
-       
+    //MARK: - Action Photo
+    
+    @IBAction func deletePhoto(_ sender: UIButton) {
+        self.imageArray.remove(at: sender.tag)
+        collectionView.reloadData()
     }
     
-    @IBAction func shootPhoto(_ sender: UIBarButtonItem) {
+    func getPhotoFromLibrary() {
+         picker.allowsEditing = false
+         picker.modalPresentationStyle = .popover
+         picker.sourceType = .photoLibrary
+         picker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
+         present(picker, animated: true, completion: nil)
+    }
+    
+    func shootPhoto() {
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             picker.allowsEditing = false
             picker.sourceType = UIImagePickerControllerSourceType.camera
@@ -195,21 +227,94 @@ class AccidentReportViewController: UIViewController, UITextFieldDelegate,UIImag
     }
     
     func noCamera(){
-        let alertVC = UIAlertController(
-            title: "No Camera",
-            message: "Sorry, this device has no camera",
-            preferredStyle: .alert)
-        let okAction = UIAlertAction(
-            title: "OK",
-            style:.default,
-            handler: nil)
+        let alertVC = UIAlertController(title: "No Camera", message: "Sorry, this device has no camera",preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style:.default, handler: nil)
         alertVC.addAction(okAction)
-        present(
-            alertVC,
-            animated: true,
-            completion: nil)
+        present(alertVC, animated: true, completion: nil)
     }
     
+    func showAlertCameraOrGalery(){
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "GALLERY", style: .default, handler: { (result : UIAlertAction) -> Void in
+            self.getPhotoFromLibrary()
+        }))
+        
+        alert.addAction(UIAlertAction(title: "CAMERA", style: .default, handler: { (result : UIAlertAction) -> Void in
+            self.shootPhoto()
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
     
+    // MARK: - UICollectionViewDataSource
     
+    func numberOfSections(in collectionView: UICollectionView) -> Int{
+        return 2
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                                     numberOfItemsInSection section: Int) -> Int {
+        if section == Def.Section.addPhoto.rawValue {
+            return 1
+        } else {
+            return self.imageArray.count
+        }
+    }
+        
+    func collectionView(_ collectionView: UICollectionView,
+                                     cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if indexPath.section == Def.Section.addPhoto.rawValue {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Def.addPhotoCollectionCellIdent , for: indexPath)
+            
+            
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Def.collectionCellIdent,
+                                                          for: indexPath) as? ImageCollectionCell
+            cell?.image.image = imageArray[indexPath.row]
+            cell?.removeButton.tag =  indexPath.row
+            return cell ?? UICollectionViewCell()
+        }
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+            if indexPath.section == 0 {
+                self.showAlertCameraOrGalery()
+            }
+    }
+    
+    //MARK : - UICollectionViewDelegateFlowLayout
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+
+        let paddingSpace = Def.sectionInsets.left * (Def.itemsPerRow + 1)
+        let availableWidth = view.frame.width - paddingSpace
+        let widthPerItem = availableWidth / Def.itemsPerRow
+        
+        return CGSize(width: widthPerItem, height: widthPerItem)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        insetForSectionAt section: Int) -> UIEdgeInsets {
+        if section == Def.Section.addPhoto.rawValue{
+            return UIEdgeInsets.zero
+        }else{
+            var inset = Def.sectionInsets
+            inset.right = 0.0
+            return inset
+        }
+        
+    }
+   
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return Def.sectionInsets.left
+    }
+
 }

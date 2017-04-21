@@ -21,6 +21,9 @@
 		4A5F652E1EA7DBF40037EDBD /* ServicessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5F652D1EA7DBF40037EDBD /* ServicessViewController.swift */; };
 		4A5F65301EA7E0B60037EDBD /* AboutRoyalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5F652F1EA7E0B60037EDBD /* AboutRoyalViewController.swift */; };
 		4A5F65321EA7F2520037EDBD /* AccidentReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5F65311EA7F2520037EDBD /* AccidentReportViewController.swift */; };
+		4A5F6B091EAA13DB0062B229 /* ImageCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5F6B081EAA13DB0062B229 /* ImageCollectionCell.swift */; };
+		4A9D3DE91EA9D17B00A8E97B /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9D3DE81EA9D17B00A8E97B /* UITextField.swift */; };
+		4A9D3DEB1EA9DE3100A8E97B /* What i want to do in Resources */ = {isa = PBXBuildFile; fileRef = 4A9D3DEA1EA9DE3100A8E97B /* What i want to do */; };
 		EAB3224A999EBC62BFA0C8D9 /* Pods_Brief_Mobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A618FA7296D70E7EE53D2DA /* Pods_Brief_Mobile.framework */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +45,9 @@
 		4A5F652D1EA7DBF40037EDBD /* ServicessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServicessViewController.swift; sourceTree = "<group>"; };
 		4A5F652F1EA7E0B60037EDBD /* AboutRoyalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutRoyalViewController.swift; sourceTree = "<group>"; };
 		4A5F65311EA7F2520037EDBD /* AccidentReportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccidentReportViewController.swift; sourceTree = "<group>"; };
+		4A5F6B081EAA13DB0062B229 /* ImageCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCollectionCell.swift; sourceTree = "<group>"; };
+		4A9D3DE81EA9D17B00A8E97B /* UITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
+		4A9D3DEA1EA9DE3100A8E97B /* What i want to do */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "What i want to do"; sourceTree = "<group>"; };
 		5A618FA7296D70E7EE53D2DA /* Pods_Brief_Mobile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Brief_Mobile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8C324D716C9497765FE2997 /* Pods-Brief Mobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Brief Mobile.release.xcconfig"; path = "Pods/Target Support Files/Pods-Brief Mobile/Pods-Brief Mobile.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -72,6 +78,7 @@
 			children = (
 				4A13F34F1EA7CA6B00E0A2B8 /* UIViewControler .swift */,
 				4A07E6421EA8AD3900D8A970 /* String.swift */,
+				4A9D3DE81EA9D17B00A8E97B /* UITextField.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -100,10 +107,12 @@
 				4A4A6D9E1EA62F3C007843A0 /* AppDelegate.swift */,
 				4A0E38421EA69E8700A1D788 /* Default.swift */,
 				4A031E781EA76D9A002C466F /* ServewManager.swift */,
+				4A5F6B0A1EAA13F10062B229 /* Cell */,
 				4A13F34E1EA7CA5E00E0A2B8 /* Extension */,
 				4A4A6DB21EA64404007843A0 /* Controller */,
-				4A4A6DA51EA62F3C007843A0 /* Assets.xcassets */,
 				4A4A6DA21EA62F3C007843A0 /* Main.storyboard */,
+				4A4A6DA51EA62F3C007843A0 /* Assets.xcassets */,
+				4A9D3DEA1EA9DE3100A8E97B /* What i want to do */,
 				4A4A6DA71EA62F3C007843A0 /* LaunchScreen.storyboard */,
 				4A4A6DAA1EA62F3C007843A0 /* Info.plist */,
 			);
@@ -121,6 +130,14 @@
 				4A5F65311EA7F2520037EDBD /* AccidentReportViewController.swift */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		4A5F6B0A1EAA13F10062B229 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				4A5F6B081EAA13DB0062B229 /* ImageCollectionCell.swift */,
+			);
+			name = Cell;
 			sourceTree = "<group>";
 		};
 		C34300A929749E3C737643C7 /* Frameworks */ = {
@@ -195,6 +212,7 @@
 			files = (
 				4A4A6DA91EA62F3C007843A0 /* LaunchScreen.storyboard in Resources */,
 				4A4A6DA61EA62F3C007843A0 /* Assets.xcassets in Resources */,
+				4A9D3DEB1EA9DE3100A8E97B /* What i want to do in Resources */,
 				4A4A6DA41EA62F3C007843A0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -255,6 +273,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A031E7B1EA77BE6002C466F /* AboutViewController.swift in Sources */,
+				4A9D3DE91EA9D17B00A8E97B /* UITextField.swift in Sources */,
 				4A07E6431EA8AD3900D8A970 /* String.swift in Sources */,
 				4A5F65321EA7F2520037EDBD /* AccidentReportViewController.swift in Sources */,
 				4A0E38431EA69E8700A1D788 /* Default.swift in Sources */,
@@ -263,6 +282,7 @@
 				4A4A6DA11EA62F3C007843A0 /* RootViewController.swift in Sources */,
 				4A4A6DB11EA643E8007843A0 /* RoyalAssistViewController.swift in Sources */,
 				4A5F65301EA7E0B60037EDBD /* AboutRoyalViewController.swift in Sources */,
+				4A5F6B091EAA13DB0062B229 /* ImageCollectionCell.swift in Sources */,
 				4A5F652E1EA7DBF40037EDBD /* ServicessViewController.swift in Sources */,
 				4A4A6D9F1EA62F3C007843A0 /* AppDelegate.swift in Sources */,
 			);

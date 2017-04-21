@@ -13,7 +13,9 @@
 		<true/>
 	</dict>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Set the Background</string>
+	<string>$(PRODUCT_NAME) photo use
+$(PRODUCT_NAME) photo use
+$(PRODUCT_NAME) photo use</string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -58,7 +60,7 @@
 	</array>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
-    <key>NSCameraUsageDescription</key>
-    <string>Set the background of the app with your beautiful photography</string>
+	<key>NSCameraUsageDescription</key>
+	<string>$(PRODUCT_NAME) camera use</string>
 </dict>
 </plist>
