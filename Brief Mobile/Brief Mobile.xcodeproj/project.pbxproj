@@ -9,7 +9,12 @@
 /* Begin PBXBuildFile section */
 		4A031E791EA76D9A002C466F /* ServewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A031E781EA76D9A002C466F /* ServewManager.swift */; };
 		4A031E7B1EA77BE6002C466F /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A031E7A1EA77BE6002C466F /* AboutViewController.swift */; };
+		4A03D8591EAA9C4B00AAB74A /* Branch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A03D8581EAA9C4B00AAB74A /* Branch.swift */; };
+		4A03D85B1EAAA6D400AAB74A /* MapBranchesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A03D85A1EAAA6D400AAB74A /* MapBranchesViewController.swift */; };
 		4A07E6431EA8AD3900D8A970 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A07E6421EA8AD3900D8A970 /* String.swift */; };
+		4A0DE51A1EAB2A2300C22D09 /* WhatList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0DE5191EAB2A2300C22D09 /* WhatList.swift */; };
+		4A0DE51C1EAB2E0600C22D09 /* AboutUs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0DE51B1EAB2E0600C22D09 /* AboutUs.swift */; };
+		4A0DE51E1EAB2FA600C22D09 /* AboutRoyalAssist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0DE51D1EAB2FA600C22D09 /* AboutRoyalAssist.swift */; };
 		4A0E38431EA69E8700A1D788 /* Default.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0E38421EA69E8700A1D788 /* Default.swift */; };
 		4A13F3501EA7CA6B00E0A2B8 /* UIViewControler .swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A13F34F1EA7CA6B00E0A2B8 /* UIViewControler .swift */; };
 		4A4A6D9F1EA62F3C007843A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4A6D9E1EA62F3C007843A0 /* AppDelegate.swift */; };
@@ -31,7 +36,13 @@
 		0D55C6F69CDC55BD2F9317FE /* Pods-Brief Mobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Brief Mobile.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Brief Mobile/Pods-Brief Mobile.debug.xcconfig"; sourceTree = "<group>"; };
 		4A031E781EA76D9A002C466F /* ServewManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServewManager.swift; sourceTree = "<group>"; };
 		4A031E7A1EA77BE6002C466F /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		4A03D8581EAA9C4B00AAB74A /* Branch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Branch.swift; sourceTree = "<group>"; };
+		4A03D85A1EAAA6D400AAB74A /* MapBranchesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapBranchesViewController.swift; sourceTree = "<group>"; };
+		4A03D85C1EAAAB9400AAB74A /* Brief Mobile-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Brief Mobile-Bridging-Header.h"; sourceTree = "<group>"; };
 		4A07E6421EA8AD3900D8A970 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		4A0DE5191EAB2A2300C22D09 /* WhatList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatList.swift; sourceTree = "<group>"; };
+		4A0DE51B1EAB2E0600C22D09 /* AboutUs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutUs.swift; sourceTree = "<group>"; };
+		4A0DE51D1EAB2FA600C22D09 /* AboutRoyalAssist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutRoyalAssist.swift; sourceTree = "<group>"; };
 		4A0E38421EA69E8700A1D788 /* Default.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Default.swift; sourceTree = "<group>"; };
 		4A13F34F1EA7CA6B00E0A2B8 /* UIViewControler .swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewControler .swift"; sourceTree = "<group>"; };
 		4A4A6D9B1EA62F3C007843A0 /* Brief Mobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Brief Mobile.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -73,6 +84,17 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		4A03D8571EAA967300AAB74A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4A03D8581EAA9C4B00AAB74A /* Branch.swift */,
+				4A0DE5191EAB2A2300C22D09 /* WhatList.swift */,
+				4A0DE51B1EAB2E0600C22D09 /* AboutUs.swift */,
+				4A0DE51D1EAB2FA600C22D09 /* AboutRoyalAssist.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		4A13F34E1EA7CA5E00E0A2B8 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -104,9 +126,11 @@
 		4A4A6D9D1EA62F3C007843A0 /* Brief Mobile */ = {
 			isa = PBXGroup;
 			children = (
+				4A03D85C1EAAAB9400AAB74A /* Brief Mobile-Bridging-Header.h */,
 				4A4A6D9E1EA62F3C007843A0 /* AppDelegate.swift */,
 				4A0E38421EA69E8700A1D788 /* Default.swift */,
 				4A031E781EA76D9A002C466F /* ServewManager.swift */,
+				4A03D8571EAA967300AAB74A /* Models */,
 				4A5F6B0A1EAA13F10062B229 /* Cell */,
 				4A13F34E1EA7CA5E00E0A2B8 /* Extension */,
 				4A4A6DB21EA64404007843A0 /* Controller */,
@@ -128,6 +152,7 @@
 				4A4A6DB01EA643E8007843A0 /* RoyalAssistViewController.swift */,
 				4A5F652D1EA7DBF40037EDBD /* ServicessViewController.swift */,
 				4A5F65311EA7F2520037EDBD /* AccidentReportViewController.swift */,
+				4A03D85A1EAAA6D400AAB74A /* MapBranchesViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -183,6 +208,7 @@
 				TargetAttributes = {
 					4A4A6D9A1EA62F3C007843A0 = {
 						CreatedOnToolsVersion = 8.1;
+						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -278,13 +304,18 @@
 				4A5F65321EA7F2520037EDBD /* AccidentReportViewController.swift in Sources */,
 				4A0E38431EA69E8700A1D788 /* Default.swift in Sources */,
 				4A13F3501EA7CA6B00E0A2B8 /* UIViewControler .swift in Sources */,
+				4A03D85B1EAAA6D400AAB74A /* MapBranchesViewController.swift in Sources */,
 				4A031E791EA76D9A002C466F /* ServewManager.swift in Sources */,
+				4A0DE51C1EAB2E0600C22D09 /* AboutUs.swift in Sources */,
 				4A4A6DA11EA62F3C007843A0 /* RootViewController.swift in Sources */,
+				4A0DE51E1EAB2FA600C22D09 /* AboutRoyalAssist.swift in Sources */,
+				4A0DE51A1EAB2A2300C22D09 /* WhatList.swift in Sources */,
 				4A4A6DB11EA643E8007843A0 /* RoyalAssistViewController.swift in Sources */,
 				4A5F65301EA7E0B60037EDBD /* AboutRoyalViewController.swift in Sources */,
 				4A5F6B091EAA13DB0062B229 /* ImageCollectionCell.swift in Sources */,
 				4A5F652E1EA7DBF40037EDBD /* ServicessViewController.swift in Sources */,
 				4A4A6D9F1EA62F3C007843A0 /* AppDelegate.swift in Sources */,
+				4A03D8591EAA9C4B00AAB74A /* Branch.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,10 +441,13 @@
 			baseConfigurationReference = 0D55C6F69CDC55BD2F9317FE /* Pods-Brief Mobile.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "Brief Mobile/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.exemple.Brief-Mobile";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Brief Mobile/Brief Mobile-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -423,10 +457,12 @@
 			baseConfigurationReference = A8C324D716C9497765FE2997 /* Pods-Brief Mobile.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "Brief Mobile/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.exemple.Brief-Mobile";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Brief Mobile/Brief Mobile-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
