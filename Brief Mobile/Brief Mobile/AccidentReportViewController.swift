@@ -7,22 +7,22 @@
 //
 
 import UIKit
+
 fileprivate struct Def {
     static let collectionCellIdent = "ImageCollectionCell"
     static let addPhotoCollectionCellIdent = "addPhotoCell"
     static let sectionInsets = UIEdgeInsets(top: 10.0, left: 20.0, bottom: 10.0, right: 20.0)
     static let itemsPerRow: CGFloat = 3
-    enum Section:Int{
-        case addPhoto = 0
-        case photos = 1
-    }
+}
+
+fileprivate enum Section: Int {
+    case addPhoto = 0
+    case photos = 1
 }
 
 class AccidentReportViewController: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
-    let picker = UIImagePickerController()
-    var imageArray = [UIImage]()
-    
+    //MARK: - IBOutlets
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var carRegTextField: UITextField!
@@ -30,24 +30,24 @@ class AccidentReportViewController: UIViewController, UITextFieldDelegate,UIImag
     @IBOutlet weak var isAgreeSwitch: UISwitch!
     @IBOutlet weak var conformButton: UIButton!
     
+    //MARK: - Properties
     var width : CGFloat?
-    
+    let picker = UIImagePickerController()
+    var imageArray = [UIImage]()
+
+    //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.configNavigationBar()
+        configNavigationBar()
         picker.delegate = self
         conformButton.layer.cornerRadius = conformButton.bounds.height / 2
-        
-        // Do any additional setup after loading the view.
     }
-    
     override func viewDidAppear(_ animated: Bool) {
-        
         width = collectionView.frame.width
     }
-    //MARK: Private Validation
     
-    private func isValidTelephone(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool{
+    //MARK: - Private Validation
+    fileprivate func isValidTelephone(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool{
         let localNumberMaxLengs = 7
         let areaNumberMaxLengs = 3
         let countryNumberMaxLengs = 3
@@ -55,7 +55,7 @@ class AccidentReportViewController: UIViewController, UITextFieldDelegate,UIImag
         let setValidation = CharacterSet.decimalDigits.inverted
         let array = string.components(separatedBy: setValidation)
         
-        if array.count > 1{
+        if array.count > 1 {
             return false
         }
         
@@ -69,16 +69,14 @@ class AccidentReportViewController: UIViewController, UITextFieldDelegate,UIImag
         
         var resultText = ""
         
-        /*+XX (XXX) XXX - XX - XX*/
         
         let localNumber = min(localNumberMaxLengs, newText.characters.count)
         
-        if localNumber>0{
+        if localNumber > 0 {
             let strNumber = newText.substring(from: newText.characters.count - localNumber )
-            // let strNumber = newText.substring(from: newText.index(newText.startIndex, offsetBy: newText.characters.count - localNumber ))
             
             resultText = strNumber
-            if resultText.characters.count > 3{
+            if resultText.characters.count > 3 {
                 resultText.insert("-", at: resultText.index(resultText.startIndex, offsetBy: 3))
             }
             if resultText.characters.count > 6{
@@ -112,84 +110,35 @@ class AccidentReportViewController: UIViewController, UITextFieldDelegate,UIImag
         
     }
     
-    private func isValidName(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String)->Bool{
+    fileprivate func isValidName(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String)->Bool{
         
         let lengthName = 20
         var setValid = CharacterSet.letters
         setValid.formUnion(CharacterSet.init(charactersIn: " "))
         setValid.invert()
         let array = string.components(separatedBy: setValid)
-        if array.count > 1{
+        if array.count > 1 {
             return false
         }
         return (textField.text?.characters.count)! < lengthName
         
     }
-    private func isValidRegNumber(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String)->Bool{
+    fileprivate func isValidRegNumber(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String)->Bool{
         let length = 10
         let setValid = CharacterSet.alphanumerics.inverted
         let array = string.components(separatedBy: setValid)
-        if array.count > 1{
+        if array.count > 1 {
             return false
         }
         return (textField.text?.characters.count)! < length
         
     }
     
-    //MARK: - UITextFieldDelegate
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
-        if textField ==  nameTextField {
-            self.carRegTextField.becomeFirstResponder()
-        }else if textField == carRegTextField{
-            self.telTextField.becomeFirstResponder()
-        }else{
-            textField.resignFirstResponder()
-        }
-        return false
-    }
-    
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        switch textField {
-        case nameTextField:
-            return isValidName (nameTextField, shouldChangeCharactersIn: range, replacementString: string)
-        case carRegTextField:
-            return isValidRegNumber(carRegTextField, shouldChangeCharactersIn: range, replacementString: string)
-        case telTextField:
-            return isValidTelephone(telTextField, shouldChangeCharactersIn: range, replacementString: string)
-        default:
-            return false
-        }
-    }
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        textField.underlined()
-        return true
-    }
-    
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        //FIXE TO 
-        textField.deunderlined()
-        return true
-    }
-    
-    @IBAction func checkButtonState(){
-        if telTextField.text?.characters.count != 0  && nameTextField.text?.characters.count != 0 && carRegTextField.text?.characters.count != 0 && isAgreeSwitch.isOn {
-            self.conformButton.isEnabled = true
-            conformButton.alpha = 1
-        } else {
-            self.conformButton.isEnabled = false
-            conformButton.alpha = 0.5
-        }
-    }
-    
     //MARK: - UIImagePickerControllerDelegate
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        
         guard let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage else {
             fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
         }
-        // Set photoImageViewArray to display the selected image.
         self.imageArray.append(selectedImage)
         self.collectionView.reloadData()
         dismiss(animated: true, completion: nil)
@@ -255,7 +204,7 @@ class AccidentReportViewController: UIViewController, UITextFieldDelegate,UIImag
     
     func collectionView(_ collectionView: UICollectionView,
                                      numberOfItemsInSection section: Int) -> Int {
-        if section == Def.Section.addPhoto.rawValue {
+        if section == Section.addPhoto.rawValue {
             return 1
         } else {
             return self.imageArray.count
@@ -264,7 +213,7 @@ class AccidentReportViewController: UIViewController, UITextFieldDelegate,UIImag
         
     func collectionView(_ collectionView: UICollectionView,
                                      cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.section == Def.Section.addPhoto.rawValue {
+        if indexPath.section == Section.addPhoto.rawValue {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Def.addPhotoCollectionCellIdent , for: indexPath)
             
             
@@ -285,8 +234,7 @@ class AccidentReportViewController: UIViewController, UITextFieldDelegate,UIImag
             }
     }
     
-    //MARK : - UICollectionViewDelegateFlowLayout
-    
+    //MARK: - UICollectionViewDelegateFlowLayout
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -301,7 +249,7 @@ class AccidentReportViewController: UIViewController, UITextFieldDelegate,UIImag
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
-        if section == Def.Section.addPhoto.rawValue{
+        if section == Section.addPhoto.rawValue{
             return UIEdgeInsets.zero
         }else{
             var inset = Def.sectionInsets
@@ -317,4 +265,48 @@ class AccidentReportViewController: UIViewController, UITextFieldDelegate,UIImag
         return Def.sectionInsets.left
     }
 
+}
+
+//MARK: - UITextFieldDelegate
+extension AccidentReportViewController {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        if textField ==  nameTextField {
+            self.carRegTextField.becomeFirstResponder()
+        } else if textField == carRegTextField{
+            self.telTextField.becomeFirstResponder()
+        } else {
+            textField.resignFirstResponder()
+        }
+        return false
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        switch textField {
+        case nameTextField:
+            return isValidName (nameTextField, shouldChangeCharactersIn: range, replacementString: string)
+        case carRegTextField:
+            return isValidRegNumber(carRegTextField, shouldChangeCharactersIn: range, replacementString: string)
+        case telTextField:
+            return isValidTelephone(telTextField, shouldChangeCharactersIn: range, replacementString: string)
+        default:
+            return false
+        }
+    }
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        textField.underlined()
+        return true
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        //FIXE TO
+        textField.deunderlined()
+        return true
+    }
+    
+    @IBAction func checkButtonState() {
+        let isValid = telTextField.text?.characters.count != 0  && nameTextField.text?.characters.count != 0 && carRegTextField.text?.characters.count != 0 && isAgreeSwitch.isOn
+        conformButton.alpha = isValid ? 1.0 : 0.5
+        conformButton.isEnabled = isValid
+    }
 }
