@@ -31,6 +31,10 @@
 		4A9D3DE91EA9D17B00A8E97B /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9D3DE81EA9D17B00A8E97B /* UITextField.swift */; };
 		4A9D3DEB1EA9DE3100A8E97B /* What i want to do in Resources */ = {isa = PBXBuildFile; fileRef = 4A9D3DEA1EA9DE3100A8E97B /* What i want to do */; };
 		4AF2AFE01EACA2FB007CB7ED /* WhatToDoControler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF2AFDF1EACA2FB007CB7ED /* WhatToDoControler.swift */; };
+		4AF2AFE21EACD589007CB7ED /* InstructionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF2AFE11EACD589007CB7ED /* InstructionViewController.swift */; };
+		4AF2AFE61EACFD87007CB7ED /* ServicesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF2AFE51EACFD87007CB7ED /* ServicesTableViewController.swift */; };
+		4AF2AFE81EACFDF4007CB7ED /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF2AFE71EACFDF4007CB7ED /* Service.swift */; };
+		4AF2AFEA1EAD1592007CB7ED /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF2AFE91EAD1592007CB7ED /* DetailViewController.swift */; };
 		EAB3224A999EBC62BFA0C8D9 /* Pods_Brief_Mobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A618FA7296D70E7EE53D2DA /* Pods_Brief_Mobile.framework */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +67,10 @@
 		4A9D3DE81EA9D17B00A8E97B /* UITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		4A9D3DEA1EA9DE3100A8E97B /* What i want to do */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "What i want to do"; sourceTree = "<group>"; };
 		4AF2AFDF1EACA2FB007CB7ED /* WhatToDoControler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatToDoControler.swift; sourceTree = "<group>"; };
+		4AF2AFE11EACD589007CB7ED /* InstructionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionViewController.swift; sourceTree = "<group>"; };
+		4AF2AFE51EACFD87007CB7ED /* ServicesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServicesTableViewController.swift; sourceTree = "<group>"; };
+		4AF2AFE71EACFDF4007CB7ED /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		4AF2AFE91EAD1592007CB7ED /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		5A618FA7296D70E7EE53D2DA /* Pods_Brief_Mobile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Brief_Mobile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8C324D716C9497765FE2997 /* Pods-Brief Mobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Brief Mobile.release.xcconfig"; path = "Pods/Target Support Files/Pods-Brief Mobile/Pods-Brief Mobile.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -93,6 +101,7 @@
 			children = (
 				4A03D8581EAA9C4B00AAB74A /* Branch.swift */,
 				4A0DE5191EAB2A2300C22D09 /* WhatList.swift */,
+				4AF2AFE71EACFDF4007CB7ED /* Service.swift */,
 				4A0DE51B1EAB2E0600C22D09 /* AboutUs.swift */,
 				4A0DE51D1EAB2FA600C22D09 /* AboutRoyalAssist.swift */,
 			);
@@ -163,10 +172,13 @@
 				4A5F652F1EA7E0B60037EDBD /* AboutRoyalViewController.swift */,
 				4A4A6DA01EA62F3C007843A0 /* RootViewController.swift */,
 				4A4A6DB01EA643E8007843A0 /* RoyalAssistViewController.swift */,
-				4A5F652D1EA7DBF40037EDBD /* ServicessViewController.swift */,
 				4A5F65311EA7F2520037EDBD /* AccidentReportViewController.swift */,
 				4A03D85A1EAAA6D400AAB74A /* MapBranchesViewController.swift */,
 				4AF2AFDF1EACA2FB007CB7ED /* WhatToDoControler.swift */,
+				4AF2AFE11EACD589007CB7ED /* InstructionViewController.swift */,
+				4A5F652D1EA7DBF40037EDBD /* ServicessViewController.swift */,
+				4AF2AFE51EACFD87007CB7ED /* ServicesTableViewController.swift */,
+				4AF2AFE91EAD1592007CB7ED /* DetailViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -321,13 +333,17 @@
 				4A03D85B1EAAA6D400AAB74A /* MapBranchesViewController.swift in Sources */,
 				4A031E791EA76D9A002C466F /* ServewManager.swift in Sources */,
 				4A0DE51C1EAB2E0600C22D09 /* AboutUs.swift in Sources */,
+				4AF2AFE21EACD589007CB7ED /* InstructionViewController.swift in Sources */,
 				4A4A6DA11EA62F3C007843A0 /* RootViewController.swift in Sources */,
+				4AF2AFE81EACFDF4007CB7ED /* Service.swift in Sources */,
 				4A0DE51E1EAB2FA600C22D09 /* AboutRoyalAssist.swift in Sources */,
 				4A0DE51A1EAB2A2300C22D09 /* WhatList.swift in Sources */,
 				4A4A6DB11EA643E8007843A0 /* RoyalAssistViewController.swift in Sources */,
+				4AF2AFEA1EAD1592007CB7ED /* DetailViewController.swift in Sources */,
 				4A1780111EABF70700F32176 /* InfoViewForMap.swift in Sources */,
 				4A5F65301EA7E0B60037EDBD /* AboutRoyalViewController.swift in Sources */,
 				4A5F6B091EAA13DB0062B229 /* ImageCollectionCell.swift in Sources */,
+				4AF2AFE61EACFD87007CB7ED /* ServicesTableViewController.swift in Sources */,
 				4AF2AFE01EACA2FB007CB7ED /* WhatToDoControler.swift in Sources */,
 				4A5F652E1EA7DBF40037EDBD /* ServicessViewController.swift in Sources */,
 				4A4A6D9F1EA62F3C007843A0 /* AppDelegate.swift in Sources */,

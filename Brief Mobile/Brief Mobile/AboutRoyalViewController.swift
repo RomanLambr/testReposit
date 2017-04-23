@@ -21,17 +21,11 @@ class AboutRoyalViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
        ServerManager.shared.getAboutRoyalAssistFromServer(success: { [](about) in
-            self.infoTextLabel.text = about.text.html2String
-            
+            self.infoTextLabel.text = about.text.htmlToString
+            self.infoTextLabel.textColor = Default.textColor
        }, failure: { (error) in
-            
+            Default.showAlertMessage(vc: self, titleStr: "Error", messageStr: "No internet conection")
        })
-        
-        ServerManager.shared.getBranchesFromServer(success: { (branches) in
-            
-        }, failure: { (error) in
-            
-        })
         
     }
     

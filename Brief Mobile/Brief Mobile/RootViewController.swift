@@ -7,9 +7,16 @@
 //
 
 import UIKit
-
+fileprivate struct Def{
+    static let identWhatToDoControler = "WhatToDoControler"
+}
 class RootViewController: UIViewController {
 
+    //MARK: - Properties
+    
+    var instructions = [WhatList]()
+    
+    //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.tintColor = UIColor.red
@@ -28,10 +35,19 @@ class RootViewController: UIViewController {
    //MARK: - Action
     @IBAction func actionOpenWeb(_ sender: Any) {
         if let url =  Default.link {
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
-            print("default browser was successfully opened")
-       
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)       
         }
     }
-
+    
+    @IBAction func actionCallWhatToDoControler(_ sender: UIButton) {
+        ServerManager.shared.getWhatToDoFromServer(success: { [weak self](instructions) in
+                let vc = self?.storyboard?.instantiateViewController(withIdentifier: Def.identWhatToDoControler ) as! WhatToDoControler
+                vc.instructions = instructions
+                self?.navigationController?.pushViewController(vc, animated: true)
+            }, failure: { (error) in
+                Default.showAlertMessage(vc: self, titleStr: "Error", messageStr: "No internet connection")
+                
+        })
+    }
+    
 }

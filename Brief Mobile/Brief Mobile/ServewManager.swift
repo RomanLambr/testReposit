@@ -9,19 +9,12 @@
 import Foundation
 import Alamofire
 
-protocol ServerManagerProtocol: class {
-    func updateHandler(_ response: Any?)
-    func errorHandler(_ error: Error?)
-}
-
 // MARK: - GET methods
 class ServerManager {
     
     static let shared = ServerManager()
     private init() {}
     
-    weak var delegate: ServerManagerProtocol?
-            
     func getAboutRoyalAssistFromServer(success:@escaping (AboutRoyalAssist) -> Void, failure:@escaping (Error?) -> Void){
         let strURL = Default.serverApi + "/api/v1/about_royal_assist"
         Alamofire.request(strURL,
@@ -82,10 +75,10 @@ class ServerManager {
             .responseJSON { (response) -> Void in
                 
                 if response.result.isSuccess {
-                    guard let branchesArray = response.result.value as? [[String: Any]]  else {
+                    guard let instructionsArray = response.result.value as? [[String: Any]]  else {
                         return
                     }
-                    let list = branchesArray.flatMap { WhatList(json: $0)}
+                    let list = instructionsArray.flatMap { WhatList(json: $0)}
                     success(list)
                     
                 }
@@ -97,4 +90,32 @@ class ServerManager {
         }
 
     }
+    
+    func getServicesFromServer(success:@escaping ([Service]) -> Void, failure:@escaping (Error?) -> Void){
+        let strURL = Default.serverApi + "/api/v1/services"
+        Alamofire.request(strURL,
+                          method: .get,
+                          parameters: nil,
+                          encoding: JSONEncoding.default,
+                          headers: nil)
+            .responseJSON { (response) -> Void in
+                
+                if response.result.isSuccess {
+                    guard let instructionsArray = response.result.value as? [[String: Any]]  else {
+                        return
+                    }
+                    let services = instructionsArray.flatMap { Service(json: $0)}
+                    success(services)
+                    
+                }
+                if response.result.isFailure {
+                    let error = response.result.error
+                    failure(error)
+                }
+                
+        }
+        
+    }
+    
+    
 }

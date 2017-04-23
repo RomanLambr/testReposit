@@ -56,9 +56,9 @@ class MapBranchesViewController: UIViewController {
     
     //MARK: - Api
     func getBranchesFromApi(){
-        ServerManager.shared.getBranchesFromServer(success: { (branches) in
-            self.branches = branches
-            self.addArrayBranches(branches: branches)
+        ServerManager.shared.getBranchesFromServer(success: { [weak self](branches) in
+            self?.branches = branches
+            self?.addArrayBranches(branches: branches)
             
         }, failure: {(error) in
             
@@ -79,8 +79,6 @@ class MapBranchesViewController: UIViewController {
         mapView.animate(with: update)
     }
 }
-
-
 
     // MARK: - CLLocationManagerDelegate
 extension MapBranchesViewController: CLLocationManagerDelegate {

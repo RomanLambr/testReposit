@@ -85,7 +85,7 @@ extension String {
 }
 
 extension String {
-    var html2AttributedString: NSAttributedString? {
+    var htmlToAttributedString: NSAttributedString? {
         do {
             return try NSAttributedString(data: Data(utf8), options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil)
         } catch {
@@ -93,7 +93,7 @@ extension String {
             return nil
         }
     }
-    var html2String: String {
-        return html2AttributedString?.string ?? ""
+    var htmlToString: String {
+        return htmlToAttributedString?.string ?? ""
     }
 }
