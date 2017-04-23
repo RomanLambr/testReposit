@@ -10,7 +10,7 @@ import UIKit
 struct Default{
     static let  phoneNumber = "77777773"
     static let  link = URL(string: "https://www.jccsmart.com/eBills/Welcome/Index/9634031")
-    static let  serverApi = "http://31.131.21.105:82/developers"
+    static let  serverApi = "http://31.131.21.105:82"
     static let  textColor = UIColor(displayP3Red: 52.0/255.0, green: 53.0/255.0, blue: 137.0/255.0, alpha: 1)
     static let  googleMapApiKey = "AIzaSyBCAOt_Qdo_FWQ8km6aaFKZUXGdvmBO1oQ"
 }

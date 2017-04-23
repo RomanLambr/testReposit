@@ -10,16 +10,29 @@ import UIKit
 
 class AboutRoyalViewController: UIViewController {
     
+    @IBOutlet weak var infoTextLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configNavigationBar()
+      
         
-        ServerManager.shared.getAboutRoyalAssist(success: { (about) in
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+       ServerManager.shared.getAboutRoyalAssistFromServer(success: { [](about) in
+            self.infoTextLabel.text = about.text.html2String
+            
+       }, failure: { (error) in
+            
+       })
+        
+        ServerManager.shared.getBranchesFromServer(success: { (branches) in
+            
+        }, failure: { (error) in
             
         })
         
-        // Do any additional setup after loading the view.
     }
-
-
+    
 }

@@ -17,78 +17,112 @@ fileprivate struct Def{
 
 class MapBranchesViewController: UIViewController {
     
-    //
-    let json : [String : Any] = ["id": 8,
-        "title": "Larnaca Office",
-        "address": "AVENSIA COURT III\r\nApt. 310 Grigory Avxentiou &\r\nApostolou Varnava Street,\r\nLarnaca",
-        "phone": "24 623544",
-        "fax": "24 629183",
-        "email": "larnacabranch@royalcrowninsurance.eu",
-        "postal_code": "6032",
-        "latitude": 34.9174668892825,
-        "longitude": 33.6361921951175]
-    
-    let json2 : [String : Any] = ["id": 8,
-                                  "title": "Larnaca Office",
-                                  "address": "AVENSIA COURT III\r\nApt. 310 Grigory Avxentiou &\r\nApostolou Varnava Street,\r\nLarnaca",
-                                  "phone": "24 623544",
-                                  "fax": "24 629183",
-                                  "email": "larnacabranch@royalcrowninsurance.eu",
-                                  "postal_code": "6032",
-                                  "latitude": 34.9274668892825,
-                                  "longitude": 33.6161921951175]
-    //
-    var branches :[Branch?] = []
+    //MARK: - IBOutlet
     @IBOutlet weak var mapView: GMSMapView!
-    let locationManager = CLLocationManager()
     
+    //MARK: - Properties
+    var branches :[Branch] = []
+    let locationManager = CLLocationManager()
+    var selected : GMSMarker?
+    
+    //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        var createBranch = Branch(json: self.json)
+        self.configNavigationBar()
+        
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
-        branches.append(createBranch)
-        createBranch = Branch(json: self.json2)
-        branches.append(createBranch)
-        addArrayBranches(branches: self.branches)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        getBranchesFromApi()
+        calculateCameraPosition(markerArray: branches)
     }
    
-    //MARK: - Private
-    
-    func addArrayBranches(branches:[Branch?]){
+    //MARK: - Add branches to map
+    func addArrayBranches(branches:[Branch]){
         for branch in branches{
             addMarkerToMap(branch: branch)
         }
     }
-    func addMarkerToMap(branch: Branch?){
-        if let tempBranch = branch{
-            let coordinate = CLLocationCoordinate2D(latitude: tempBranch.latitude , longitude: tempBranch.longitude )
+    func addMarkerToMap(branch: Branch){
+        
+            let coordinate = CLLocationCoordinate2D(latitude: branch.latitude, longitude: branch.longitude )
             let marker = GMSMarker(position: coordinate)
             marker.icon = Def.passiveImage
+            marker.title = branch.title
             marker.map = mapView
-        }
     }
     
-
+    //MARK: - Api
+    func getBranchesFromApi(){
+        ServerManager.shared.getBranchesFromServer(success: { (branches) in
+            self.branches = branches
+            self.addArrayBranches(branches: branches)
+            
+        }, failure: {(error) in
+            
+        })
+    }
+    
+    //MARK: - Map Calculation
+    func calculateCameraPosition(markerArray:[Branch]){
+        var bounds = GMSCoordinateBounds()
+        for marker in markerArray {
+            bounds = bounds.includingCoordinate(marker.position)
+        }
+        if let mylocation = mapView.myLocation?.coordinate {
+            bounds = bounds.includingCoordinate(mylocation)
+        }
+        let update = GMSCameraUpdate.fit(bounds, withPadding: 60)
+        
+        mapView.animate(with: update)
+    }
 }
 
-// MARK: - CLLocationManagerDelegate
 
+
+    // MARK: - CLLocationManagerDelegate
 extension MapBranchesViewController: CLLocationManagerDelegate {
-   func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus){
-        
+   func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if status == .authorizedWhenInUse {
             locationManager.startUpdatingLocation()
             mapView.isMyLocationEnabled = true
-            mapView.settings.myLocationButton = true
+          
         }
     }
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.first {
-            mapView.camera = GMSCameraPosition(target: location.coordinate, zoom: 15, bearing: 0, viewingAngle: 0)
+        if locations.first != nil {
+            calculateCameraPosition(markerArray: branches)
             locationManager.stopUpdatingLocation()
+            
         }
-        
     }
+    
+}
+    // MARK: - GMSMapViewDelegate
+extension MapBranchesViewController:GMSMapViewDelegate{
+
+    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+        if marker == selected {
+            return true
+        }
+        if let sel = selected{
+            deActivateMarker(marker: sel)
+        }
+        activateMarker(marker: marker)
+        selected = marker
+        return true
+    }
+    
+    func activateMarker (marker: GMSMarker){
+        marker.icon = Def.activeImage
+    }
+   
+    func deActivateMarker (marker: GMSMarker){
+        marker.icon = Def.passiveImage
+    }
+    
 }
 

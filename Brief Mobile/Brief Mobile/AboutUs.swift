@@ -10,13 +10,13 @@ import Foundation
 
 struct AboutUs {
     
-    var about       :String
+    var text:String
     
     init?(json: [String: Any]) {
-        guard let about = json["about_us"] as? String
+        guard let text = json["about_us"] as? String
             else {
                 return nil
         }
-        self.about = about
+        self.text = text
     }
 }

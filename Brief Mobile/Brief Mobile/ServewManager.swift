@@ -21,51 +21,80 @@ class ServerManager {
     private init() {}
     
     weak var delegate: ServerManagerProtocol?
-    
-    func getAboutRoyalAssist(success: @escaping (_ aboutInfo :String) -> ()) {
-        
-        let dictParameters = [:] as [String : Any]
-        
-        let url = URL(string: Default.serverApi + "/api/v1/about_royal_assist")!
-        
-        Alamofire.request(
-            url,
-            method: .get,
-            parameters: dictParameters)
-            .validate()
-            .responseJSON { [weak self] (response) -> Void in
-                guard response.result.isSuccess else {
-                    self?.delegate?.errorHandler(response.error)
-                    print("Error while fetching info: \(response.result.error)")
+            
+    func getAboutRoyalAssistFromServer(success:@escaping (AboutRoyalAssist) -> Void, failure:@escaping (Error?) -> Void){
+        let strURL = Default.serverApi + "/api/v1/about_royal_assist"
+        Alamofire.request(strURL,
+                          method: .get,
+                          parameters: nil,
+                          encoding: JSONEncoding.default,
+                          headers: nil)
+                         .responseJSON { (response) -> Void in
+                    
+            if response.result.isSuccess {
+                guard let value = response.result.value as? [String: Any],
+                let about = AboutRoyalAssist.init(json: value) else {
                     return
                 }
-                
-                guard let value = response.result.value as? [String: Any],
-                    let about = value["about_royal_assist"] as? String else {
-                        print("Malformed data received from fetch")
-                        return
-                }
-                
-                print(about)
-                /*
-                 var userArray = [RLUser]()
-                 for friend in friendsDictArray{
-                 guard let user = RLUser(json: friend) else {
-                 print( "Could not create User object from JSON")
-                 return
-                 }
-                 userArray.append(user)
-                 } equel
-                 */
-                
-                //let users = friendsDictArray.flatMap { RLUser(json: $0)}
-                /*for user in users{
-                    print(user.firstName ?? "")
-                }*/
                 success(about)
+                
+            }
+            if response.result.isFailure {
+                let error = response.result.error
+                    failure(error)
+            }
+    
         }
-        
     }
     
+    func getBranchesFromServer(success:@escaping ([Branch]) -> Void, failure:@escaping (Error?) -> Void){
+        let strURL = Default.serverApi + "/api/v1/branches"
+        Alamofire.request(strURL,
+                          method: .get,
+                          parameters: nil,
+                          encoding: JSONEncoding.default,
+                          headers: nil)
+            .responseJSON { (response) -> Void in
+               
+                if response.result.isSuccess {
+                    guard let branchesArray = response.result.value as? [[String: Any]]  else {
+                            return
+                    }
+                    let branches = branchesArray.flatMap { Branch(json: $0)}
+                    success(branches)
+                    
+                }
+                if response.result.isFailure {
+                    let error = response.result.error
+                    failure(error)
+                }
+                
+        }
+    }
     
+    func getWhatToDoFromServer(success:@escaping ([WhatList]) -> Void, failure:@escaping (Error?) -> Void){
+        let strURL = Default.serverApi + "/api/v1/accident_instructions"
+        Alamofire.request(strURL,
+                          method: .get,
+                          parameters: nil,
+                          encoding: JSONEncoding.default,
+                          headers: nil)
+            .responseJSON { (response) -> Void in
+                
+                if response.result.isSuccess {
+                    guard let branchesArray = response.result.value as? [[String: Any]]  else {
+                        return
+                    }
+                    let list = branchesArray.flatMap { WhatList(json: $0)}
+                    success(list)
+                    
+                }
+                if response.result.isFailure {
+                    let error = response.result.error
+                    failure(error)
+                }
+                
+        }
+
+    }
 }
