@@ -28,6 +28,7 @@
 		4A5F65301EA7E0B60037EDBD /* AboutRoyalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5F652F1EA7E0B60037EDBD /* AboutRoyalViewController.swift */; };
 		4A5F65321EA7F2520037EDBD /* AccidentReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5F65311EA7F2520037EDBD /* AccidentReportViewController.swift */; };
 		4A5F6B091EAA13DB0062B229 /* ImageCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5F6B081EAA13DB0062B229 /* ImageCollectionCell.swift */; };
+		4A8DD9031EADDB310015C608 /* AboutUsViewControler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8DD9021EADDB310015C608 /* AboutUsViewControler.swift */; };
 		4A9D3DE91EA9D17B00A8E97B /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9D3DE81EA9D17B00A8E97B /* UITextField.swift */; };
 		4A9D3DEB1EA9DE3100A8E97B /* What i want to do in Resources */ = {isa = PBXBuildFile; fileRef = 4A9D3DEA1EA9DE3100A8E97B /* What i want to do */; };
 		4AF2AFE01EACA2FB007CB7ED /* WhatToDoControler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF2AFDF1EACA2FB007CB7ED /* WhatToDoControler.swift */; };
@@ -64,6 +65,7 @@
 		4A5F652F1EA7E0B60037EDBD /* AboutRoyalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutRoyalViewController.swift; sourceTree = "<group>"; };
 		4A5F65311EA7F2520037EDBD /* AccidentReportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccidentReportViewController.swift; sourceTree = "<group>"; };
 		4A5F6B081EAA13DB0062B229 /* ImageCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCollectionCell.swift; sourceTree = "<group>"; };
+		4A8DD9021EADDB310015C608 /* AboutUsViewControler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutUsViewControler.swift; sourceTree = "<group>"; };
 		4A9D3DE81EA9D17B00A8E97B /* UITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		4A9D3DEA1EA9DE3100A8E97B /* What i want to do */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "What i want to do"; sourceTree = "<group>"; };
 		4AF2AFDF1EACA2FB007CB7ED /* WhatToDoControler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatToDoControler.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				4A031E7A1EA77BE6002C466F /* AboutViewController.swift */,
+				4A8DD9021EADDB310015C608 /* AboutUsViewControler.swift */,
 				4A5F652F1EA7E0B60037EDBD /* AboutRoyalViewController.swift */,
 				4A4A6DA01EA62F3C007843A0 /* RootViewController.swift */,
 				4A4A6DB01EA643E8007843A0 /* RoyalAssistViewController.swift */,
@@ -337,6 +340,7 @@
 				4A4A6DA11EA62F3C007843A0 /* RootViewController.swift in Sources */,
 				4AF2AFE81EACFDF4007CB7ED /* Service.swift in Sources */,
 				4A0DE51E1EAB2FA600C22D09 /* AboutRoyalAssist.swift in Sources */,
+				4A8DD9031EADDB310015C608 /* AboutUsViewControler.swift in Sources */,
 				4A0DE51A1EAB2A2300C22D09 /* WhatList.swift in Sources */,
 				4A4A6DB11EA643E8007843A0 /* RoyalAssistViewController.swift in Sources */,
 				4AF2AFEA1EAD1592007CB7ED /* DetailViewController.swift in Sources */,

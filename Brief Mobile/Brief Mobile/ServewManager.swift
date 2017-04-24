@@ -40,6 +40,31 @@ class ServerManager {
         }
     }
     
+    func getAboutFromServer(success:@escaping (AboutUs) -> Void, failure:@escaping (Error?) -> Void){
+        let strURL = Default.serverApi + "/api/v1/about_us"
+        Alamofire.request(strURL,
+                          method: .get,
+                          parameters: nil,
+                          encoding: JSONEncoding.default,
+                          headers: nil)
+            .responseJSON { (response) -> Void in
+                
+                if response.result.isSuccess {
+                    guard let value = response.result.value as? [String: Any],
+                        let about = AboutUs.init(json: value) else {
+                            return
+                    }
+                    success(about)
+                    
+                }
+                if response.result.isFailure {
+                    let error = response.result.error
+                    failure(error)
+                }
+                
+        }
+    }
+    
     func getBranchesFromServer(success:@escaping ([Branch]) -> Void, failure:@escaping (Error?) -> Void){
         let strURL = Default.serverApi + "/api/v1/branches"
         Alamofire.request(strURL,

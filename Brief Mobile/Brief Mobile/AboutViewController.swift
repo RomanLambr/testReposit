@@ -11,15 +11,10 @@ import UIKit
 class AboutViewController: UIViewController {
 
     
-    
-    
+    //MARK: - LifeCycle
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         self.configNavigationBar()
-        
-        // Do any additional setup after loading the view.
     }
-
 
 }

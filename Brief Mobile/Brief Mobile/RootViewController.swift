@@ -13,7 +13,6 @@ fileprivate struct Def{
 class RootViewController: UIViewController {
 
     //MARK: - Properties
-    
     var instructions = [WhatList]()
     
     //MARK: - Lifecycle
@@ -23,13 +22,6 @@ class RootViewController: UIViewController {
         let logo = #imageLiteral(resourceName: "main_logo")
         let imageView = UIImageView(image:logo)
         self.navigationItem.titleView = imageView
-        
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
    //MARK: - Action
@@ -46,7 +38,6 @@ class RootViewController: UIViewController {
                 self?.navigationController?.pushViewController(vc, animated: true)
             }, failure: { (error) in
                 Default.showAlertMessage(vc: self, titleStr: "Error", messageStr: "No internet connection")
-                
         })
     }
     

@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class InstructionViewController: UIViewController {
     
     struct Tab{
@@ -20,7 +19,7 @@ class InstructionViewController: UIViewController {
     @IBOutlet weak var infoLabel: UILabel!
     @IBOutlet weak var segment: UISegmentedControl!
     @IBOutlet weak var segmentHightConstraint: NSLayoutConstraint!
-   
+    
     //MARK: - Properties
     var instruction : WhatList? = nil
     var tabs = [Tab]()
@@ -30,7 +29,6 @@ class InstructionViewController: UIViewController {
         super.viewDidLoad()
         self.configNavigationBar()
         prepareSegment()
-    
     }
     
     //MARK: - Private
@@ -48,9 +46,9 @@ class InstructionViewController: UIViewController {
         navigationItem.title = instruction.title
         changeContext()
         if instruction.tabs == false{
-           segmentHightConstraint.constant = 0.0
-           segment.isHidden = true
-           return
+            segmentHightConstraint.constant = 0.0
+            segment.isHidden = true
+            return
         }
         segment.tintColor = Default.textColor
         for i in 0..<segment.numberOfSegments{
@@ -67,8 +65,4 @@ class InstructionViewController: UIViewController {
     @IBAction func segmentChange(_ sender: Any) {
         changeContext()
     }
-    
-    
-    
-
 }

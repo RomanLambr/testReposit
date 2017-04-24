@@ -10,19 +10,13 @@ import UIKit
 
 class RoyalAssistViewController: UIViewController {
     
+    //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configNavigationBar()
-        
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    //MARK: ACTIONS
-    
+    //MARK: - ACTIONS
     @IBAction func makeCall(_ sender: Any) {
         
         if let phoneCallURL:URL = URL(string: "tel://\(Default.phoneNumber )") {
@@ -33,12 +27,10 @@ class RoyalAssistViewController: UIViewController {
                     application.open(phoneCallURL, options: [:], completionHandler: nil)
                 })
                 let noPressed = UIAlertAction(title: "No", style: .default, handler: { (action) in
-                    
                 })
                 alertController.addAction(yesPressed)
                 alertController.addAction(noPressed)
                 present(alertController, animated: true, completion: nil)
-                
             }
         }
         

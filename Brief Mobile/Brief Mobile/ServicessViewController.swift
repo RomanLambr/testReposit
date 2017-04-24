@@ -15,15 +15,14 @@ fileprivate enum Type : String{
     case business = "Business"
 }
 class ServicessViewController: UIViewController {
-
+    
+    //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configNavigationBar()
-     
     }
     
-//MARK: - IBActions
-    
+    //MARK: - IBActions
     @IBAction func callBusinessServises(_ sender: Any) {
         getServicesFromApi(type: .business)
     }
@@ -31,7 +30,7 @@ class ServicessViewController: UIViewController {
     @IBAction func callPersonalServises(_ sender: Any) {
         getServicesFromApi(type: .personal)
     }
-
+    
     private func getServicesFromApi(type : Type){
         ServerManager.shared.getServicesFromServer(success: { [weak self](services) in
             let viewControler = self?.storyboard?.instantiateViewController(withIdentifier: Def.idenServiceTableViewControler) as! ServicesTableViewController
@@ -40,8 +39,6 @@ class ServicessViewController: UIViewController {
             self?.navigationController?.pushViewController(viewControler, animated: true)
             }, failure: { (error) in
                 Default.showAlertMessage(vc: self, titleStr: "Error", messageStr: "No internet connection")
-                
         })
     }
-
 }

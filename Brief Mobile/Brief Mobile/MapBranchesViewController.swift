@@ -18,7 +18,9 @@ fileprivate struct Def{
 class MapBranchesViewController: UIViewController {
     
     //MARK: - IBOutlet
+    @IBOutlet weak var infoView: InfoViewForMap!
     @IBOutlet weak var mapView: GMSMapView!
+    @IBOutlet weak var nameBranchLabel: UILabel!
     
     //MARK: - Properties
     var branches :[Branch] = []
@@ -50,7 +52,7 @@ class MapBranchesViewController: UIViewController {
             let coordinate = CLLocationCoordinate2D(latitude: branch.latitude, longitude: branch.longitude )
             let marker = GMSMarker(position: coordinate)
             marker.icon = Def.passiveImage
-            marker.title = branch.title
+            marker.userData = branch
             marker.map = mapView
     }
     
@@ -59,9 +61,8 @@ class MapBranchesViewController: UIViewController {
         ServerManager.shared.getBranchesFromServer(success: { [weak self](branches) in
             self?.branches = branches
             self?.addArrayBranches(branches: branches)
-            
         }, failure: {(error) in
-            
+            Default.showAlertMessage(vc: self, titleStr: "Error", messageStr: "Can't get branches from server")
         })
     }
     
@@ -78,6 +79,25 @@ class MapBranchesViewController: UIViewController {
         
         mapView.animate(with: update)
     }
+    //MARK: - Actions
+    @IBAction func upView(_ sender: Any) {
+        infoView.sizeToFit()
+        print("tap")
+    }
+    
+    @IBAction func trackRouteToBranche(_ sender: Any) {
+        
+        guard let mylocation = locationManager.location,
+              let marker = selected else { return }
+        let path = GMSMutablePath()
+        path.add(marker.position)
+        path.add(mylocation.coordinate)
+        let rectangle = GMSPolyline(path: path)
+        rectangle.strokeWidth = 2.0
+        rectangle.strokeColor = Default.textColor
+        rectangle.map = mapView
+    }
+    
 }
 
     // MARK: - CLLocationManagerDelegate
@@ -116,11 +136,14 @@ extension MapBranchesViewController:GMSMapViewDelegate{
     
     func activateMarker (marker: GMSMarker){
         marker.icon = Def.activeImage
+        guard let data = marker.userData as? Branch else { return }
+        nameBranchLabel.text = data.title
     }
    
     func deActivateMarker (marker: GMSMarker){
         marker.icon = Def.passiveImage
     }
+    
     
 }
 

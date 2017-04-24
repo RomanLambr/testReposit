@@ -20,7 +20,7 @@ fileprivate enum Section: Int {
     case photos = 1
 }
 
-class AccidentReportViewController: UIViewController, UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class AccidentReportViewController: UIViewController, UINavigationControllerDelegate, UICollectionViewDelegateFlowLayout {
 
     //MARK: - IBOutlets
     @IBOutlet weak var collectionView: UICollectionView!
@@ -46,7 +46,7 @@ class AccidentReportViewController: UIViewController, UITextFieldDelegate,UIImag
         width = collectionView.frame.width
     }
     
-    //MARK: - Private Validation
+    //MARK: - Validation
     fileprivate func isValidTelephone(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool{
         let localNumberMaxLengs = 7
         let areaNumberMaxLengs = 3
@@ -133,20 +133,7 @@ class AccidentReportViewController: UIViewController, UITextFieldDelegate,UIImag
         return (textField.text?.characters.count)! < length
         
     }
-    
-    //MARK: - UIImagePickerControllerDelegate
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        guard let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage else {
-            fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
-        }
-        self.imageArray.append(selectedImage)
-        self.collectionView.reloadData()
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true, completion: nil)
-    }
+
     
     //MARK: - Action Photo
     
@@ -195,13 +182,13 @@ class AccidentReportViewController: UIViewController, UITextFieldDelegate,UIImag
         
         self.present(alert, animated: true, completion: nil)
     }
-    
-    // MARK: - UICollectionViewDataSource
-    
+}
+
+//MARK: - UICollectionViewDataSource,UICollectionViewDelegate
+extension AccidentReportViewController: UICollectionViewDelegate,UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int{
         return 2
     }
-    
     func collectionView(_ collectionView: UICollectionView,
                                      numberOfItemsInSection section: Int) -> Int {
         if section == Section.addPhoto.rawValue {
@@ -210,13 +197,10 @@ class AccidentReportViewController: UIViewController, UITextFieldDelegate,UIImag
             return self.imageArray.count
         }
     }
-        
     func collectionView(_ collectionView: UICollectionView,
                                      cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.section == Section.addPhoto.rawValue {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Def.addPhotoCollectionCellIdent , for: indexPath)
-            
-            
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Def.collectionCellIdent,
@@ -225,7 +209,6 @@ class AccidentReportViewController: UIViewController, UITextFieldDelegate,UIImag
             cell?.removeButton.tag =  indexPath.row
             return cell ?? UICollectionViewCell()
         }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -233,42 +216,9 @@ class AccidentReportViewController: UIViewController, UITextFieldDelegate,UIImag
                 self.showAlertCameraOrGalery()
             }
     }
-    
-    //MARK: - UICollectionViewDelegateFlowLayout
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
-
-        let paddingSpace = Def.sectionInsets.left * (Def.itemsPerRow + 1)
-        let availableWidth = view.frame.width - paddingSpace
-        let widthPerItem = availableWidth / Def.itemsPerRow
-        
-        return CGSize(width: widthPerItem, height: widthPerItem)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        insetForSectionAt section: Int) -> UIEdgeInsets {
-        if section == Section.addPhoto.rawValue{
-            return UIEdgeInsets.zero
-        }else{
-            var inset = Def.sectionInsets
-            inset.right = 0.0
-            return inset
-        }
-        
-    }
-   
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return Def.sectionInsets.left
-    }
-
 }
-
 //MARK: - UITextFieldDelegate
-extension AccidentReportViewController {
+extension AccidentReportViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         if textField ==  nameTextField {
@@ -299,7 +249,6 @@ extension AccidentReportViewController {
     }
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        //FIXE TO
         textField.deunderlined()
         return true
     }
@@ -308,5 +257,21 @@ extension AccidentReportViewController {
         let isValid = telTextField.text?.characters.count != 0  && nameTextField.text?.characters.count != 0 && carRegTextField.text?.characters.count != 0 && isAgreeSwitch.isOn
         conformButton.alpha = isValid ? 1.0 : 0.5
         conformButton.isEnabled = isValid
+    }
+}
+
+//MARK: - UIImagePickerControllerDelegate
+extension AccidentReportViewController:UIImagePickerControllerDelegate{
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        guard let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage else {
+            fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
+        }
+        self.imageArray.append(selectedImage)
+        self.collectionView.reloadData()
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
     }
 }

@@ -27,12 +27,10 @@ class WhatToDoControler: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    // MARK: - Table view data source
-
+// MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return  instructions.count
     }
-
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Def.cellIdentifier, for: indexPath)
@@ -40,6 +38,7 @@ class WhatToDoControler: UITableViewController {
         return cell
     }
 }
+
 //MARK: - UITableViewDelegate
 extension WhatToDoControler{
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
