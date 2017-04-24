@@ -11,8 +11,8 @@ fileprivate struct Def{
     static let idenServiceTableViewControler = "ServiceTableViewControler"
 }
 fileprivate enum Type : String{
-    case personal = "Personal"
-    case business = "Business"
+    case personal = "personal"
+    case business = "business"
 }
 class ServicessViewController: UIViewController {
     
@@ -32,10 +32,10 @@ class ServicessViewController: UIViewController {
     }
     
     private func getServicesFromApi(type : Type){
-        ServerManager.shared.getServicesFromServer(success: { [weak self](services) in
+        ServerManager.shared.getServicesFromServer(perPage: 20, servicseType: type.rawValue, success: { [weak self](services) in
             let viewControler = self?.storyboard?.instantiateViewController(withIdentifier: Def.idenServiceTableViewControler) as! ServicesTableViewController
             viewControler.services = services
-            viewControler.navigationItem.title = type.rawValue
+            viewControler.navigationItem.title = type.rawValue.capitalized
             self?.navigationController?.pushViewController(viewControler, animated: true)
             }, failure: { (error) in
                 Default.showAlertMessage(vc: self, titleStr: "Error", messageStr: "No internet connection")

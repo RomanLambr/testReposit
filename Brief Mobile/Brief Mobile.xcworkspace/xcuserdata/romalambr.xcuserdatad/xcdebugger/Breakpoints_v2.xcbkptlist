@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Brief Mobile/MapBranchesViewController.swift"
-            timestampString = "514672273.323121"
+            timestampString = "514733648.742811"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
             landmarkName = "MapBranchesViewController"
             landmarkType = "3">
          </BreakpointContent>

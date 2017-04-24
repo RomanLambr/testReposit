@@ -24,7 +24,6 @@ struct Service {
             else {
                 return nil
         }
-        
         self.id = id
         self.title = title
         self.website = URL.init(string: website)

@@ -92,7 +92,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="800"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bGg-zf-dWx">
-                                                <rect key="frame" x="0.0" y="0.0" width="184" height="195"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="183.5" height="195"/>
                                                 <state key="normal" title="ROYAL ASSIST" backgroundImage="royal_assist_image">
                                                     <color key="titleShadowColor" red="0.20534354448318481" green="0.15281885862350464" blue="0.27864927053451538" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
@@ -101,7 +101,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jl7-mK-sL8">
-                                                <rect key="frame" x="192" y="0.0" width="183" height="195"/>
+                                                <rect key="frame" x="191.5" y="0.0" width="183.5" height="195"/>
                                                 <state key="normal" title="ROYAL PAYMENT" backgroundImage="royal_payment_image"/>
                                                 <connections>
                                                     <action selector="actionOpenWeb:" destination="VE7-sB-Pw4" eventType="touchUpInside" id="ufl-Ch-kE4"/>
@@ -115,14 +115,14 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hFc-g3-v8j">
-                                                <rect key="frame" x="0.0" y="406" width="184" height="195"/>
+                                                <rect key="frame" x="0.0" y="406" width="183.5" height="195"/>
                                                 <state key="normal" title="WHAT TO DO IF" backgroundImage="what_to_do_if_image"/>
                                                 <connections>
                                                     <action selector="actionCallWhatToDoControler:" destination="VE7-sB-Pw4" eventType="touchUpInside" id="rry-un-8KO"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4lX-ku-0WZ">
-                                                <rect key="frame" x="192" y="406" width="183" height="195"/>
+                                                <rect key="frame" x="191.5" y="406" width="183.5" height="195"/>
                                                 <state key="normal" title="ABOUT" backgroundImage="about_image"/>
                                                 <connections>
                                                     <segue destination="HV3-d1-nHp" kind="show" id="17T-ED-fTK"/>
@@ -641,10 +641,10 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pWc-tz-iXu" customClass="InfoViewForMap" customModule="Brief_Mobile" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="546" width="375" height="128"/>
+                                <rect key="frame" x="0.0" y="602" width="375" height="72"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OjX-g9-rrH">
-                                        <rect key="frame" x="24" y="16" width="255" height="24"/>
+                                        <rect key="frame" x="16" y="16" width="263" height="24"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -667,18 +667,26 @@
                                             <action selector="trackRouteToBranche:" destination="Bjm-hy-IHU" eventType="touchUpInside" id="iN4-9D-HNn"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xgD-mO-NCM">
+                                        <rect key="frame" x="16" y="56" width="343" height="0.0"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="OjX-g9-rrH" firstAttribute="centerY" secondItem="21K-i2-Z1S" secondAttribute="centerY" id="8QP-7t-YT1"/>
-                                    <constraint firstItem="OjX-g9-rrH" firstAttribute="leading" secondItem="pWc-tz-iXu" secondAttribute="leadingMargin" constant="16" id="Grd-HZ-xKj"/>
-                                    <constraint firstAttribute="height" constant="128" id="JCG-Zz-Tkg"/>
+                                    <constraint firstItem="OjX-g9-rrH" firstAttribute="leading" secondItem="pWc-tz-iXu" secondAttribute="leading" constant="16" id="FHw-HX-QIl"/>
                                     <constraint firstItem="21K-i2-Z1S" firstAttribute="top" secondItem="pWc-tz-iXu" secondAttribute="top" constant="16" id="JxO-c1-K4i"/>
+                                    <constraint firstItem="xgD-mO-NCM" firstAttribute="leading" secondItem="pWc-tz-iXu" secondAttribute="leading" constant="16" id="N64-zj-Syq"/>
                                     <constraint firstAttribute="trailing" secondItem="vI4-aP-oyC" secondAttribute="trailing" constant="16" id="OM6-SL-4tr"/>
                                     <constraint firstItem="vI4-aP-oyC" firstAttribute="top" secondItem="pWc-tz-iXu" secondAttribute="top" constant="16" id="Wsr-kx-WoI"/>
                                     <constraint firstItem="OjX-g9-rrH" firstAttribute="top" secondItem="pWc-tz-iXu" secondAttribute="top" constant="16" id="baX-Jj-awx"/>
                                     <constraint firstItem="vI4-aP-oyC" firstAttribute="leading" secondItem="21K-i2-Z1S" secondAttribute="trailing" constant="16" id="kcp-9r-3WX"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="128" id="lSM-kE-t1Y"/>
+                                    <constraint firstItem="xgD-mO-NCM" firstAttribute="top" secondItem="21K-i2-Z1S" secondAttribute="bottom" constant="16" id="mN0-oz-iaX"/>
+                                    <constraint firstAttribute="trailing" secondItem="xgD-mO-NCM" secondAttribute="trailing" constant="16" id="pnb-eR-RVL"/>
+                                    <constraint firstAttribute="bottom" secondItem="xgD-mO-NCM" secondAttribute="bottom" constant="16" id="urZ-Vq-yJM"/>
                                     <constraint firstAttribute="trailing" secondItem="OjX-g9-rrH" secondAttribute="trailing" constant="96" id="vmM-J2-AHZ"/>
                                 </constraints>
                             </view>
@@ -698,6 +706,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="detailButton" destination="vI4-aP-oyC" id="LPZ-iw-dHt"/>
+                        <outlet property="detailInfoLabel" destination="xgD-mO-NCM" id="1jo-vy-dTK"/>
                         <outlet property="infoView" destination="pWc-tz-iXu" id="Z4w-h6-FFM"/>
                         <outlet property="mapView" destination="p8J-IR-FNl" id="EG9-Ij-gVv"/>
                         <outlet property="nameBranchLabel" destination="OjX-g9-rrH" id="Chv-hu-259"/>
@@ -705,7 +715,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CEU-Vh-1iJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2065" y="2415"/>
+            <point key="canvasLocation" x="2064.8000000000002" y="2414.3928035982012"/>
         </scene>
         <!--What to do if-->
         <scene sceneID="gRy-sO-QZr">
@@ -834,7 +844,7 @@
         <scene sceneID="0sH-kP-b0m">
             <objects>
                 <navigationController id="1wv-I4-6y8" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Dwl-gC-URh">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Dwl-gC-URh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

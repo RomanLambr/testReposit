@@ -9,34 +9,31 @@
 import Foundation
 import Alamofire
 
-// MARK: - GET methods
 class ServerManager {
     
     static let shared = ServerManager()
     private init() {}
     
+    // MARK: - GET methods
     func getAboutRoyalAssistFromServer(success:@escaping (AboutRoyalAssist) -> Void, failure:@escaping (Error?) -> Void){
         let strURL = Default.serverApi + "/api/v1/about_royal_assist"
         Alamofire.request(strURL,
                           method: .get,
                           parameters: nil,
-                          encoding: JSONEncoding.default,
+                          encoding: URLEncoding.default,
                           headers: nil)
-                         .responseJSON { (response) -> Void in
-                    
-            if response.result.isSuccess {
-                guard let value = response.result.value as? [String: Any],
-                let about = AboutRoyalAssist.init(json: value) else {
-                    return
+            .responseJSON { (response) -> Void in
+                if response.result.isSuccess {
+                    guard let value = response.result.value as? [String: Any],
+                        let about = AboutRoyalAssist.init(json: value) else {
+                            return
+                    }
+                    success(about)
                 }
-                success(about)
-                
-            }
-            if response.result.isFailure {
-                let error = response.result.error
+                if response.result.isFailure {
+                    let error = response.result.error
                     failure(error)
-            }
-    
+                }
         }
     }
     
@@ -45,48 +42,41 @@ class ServerManager {
         Alamofire.request(strURL,
                           method: .get,
                           parameters: nil,
-                          encoding: JSONEncoding.default,
+                          encoding: URLEncoding.default,
                           headers: nil)
             .responseJSON { (response) -> Void in
-                
                 if response.result.isSuccess {
                     guard let value = response.result.value as? [String: Any],
-                        let about = AboutUs.init(json: value) else {
+                            let about = AboutUs.init(json: value) else {
                             return
                     }
                     success(about)
-                    
                 }
                 if response.result.isFailure {
                     let error = response.result.error
                     failure(error)
                 }
-                
         }
     }
     
     func getBranchesFromServer(success:@escaping ([Branch]) -> Void, failure:@escaping (Error?) -> Void){
         let strURL = Default.serverApi + "/api/v1/branches"
+        
         Alamofire.request(strURL,
                           method: .get,
                           parameters: nil,
-                          encoding: JSONEncoding.default,
+                          encoding: URLEncoding.default,
                           headers: nil)
             .responseJSON { (response) -> Void in
-               
                 if response.result.isSuccess {
-                    guard let branchesArray = response.result.value as? [[String: Any]]  else {
-                            return
-                    }
-                    let branches = branchesArray.flatMap { Branch(json: $0)}
+                    guard let branchesArray = response.result.value as? [[String: Any]]  else { return }
+                    let branches = branchesArray.flatMap { Branch(json: $0) }
                     success(branches)
-                    
                 }
                 if response.result.isFailure {
                     let error = response.result.error
                     failure(error)
                 }
-                
         }
     }
     
@@ -95,52 +85,68 @@ class ServerManager {
         Alamofire.request(strURL,
                           method: .get,
                           parameters: nil,
-                          encoding: JSONEncoding.default,
+                          encoding: URLEncoding.default,
                           headers: nil)
             .responseJSON { (response) -> Void in
-                
                 if response.result.isSuccess {
-                    guard let instructionsArray = response.result.value as? [[String: Any]]  else {
+                    guard let instructionsArray = response.result.value as? [[String: Any]] else {
                         return
                     }
                     let list = instructionsArray.flatMap { WhatList(json: $0)}
                     success(list)
-                    
                 }
                 if response.result.isFailure {
                     let error = response.result.error
                     failure(error)
                 }
-                
         }
-
     }
     
-    func getServicesFromServer(success:@escaping ([Service]) -> Void, failure:@escaping (Error?) -> Void){
+    func getServicesFromServer(perPage: Int, servicseType: String,  success: @escaping ([Service]) -> Void, failure: @escaping (Error?) -> Void) {
         let strURL = Default.serverApi + "/api/v1/services"
+        let parameters : [String : Any] = ["per_page" : perPage, "service_type" : servicseType]
         Alamofire.request(strURL,
                           method: .get,
-                          parameters: nil,
-                          encoding: JSONEncoding.default,
+                          parameters: parameters,
+                          encoding: URLEncoding.default,
                           headers: nil)
             .responseJSON { (response) -> Void in
-                
                 if response.result.isSuccess {
                     guard let instructionsArray = response.result.value as? [[String: Any]]  else {
                         return
                     }
-                    let services = instructionsArray.flatMap { Service(json: $0)}
+                    let services = instructionsArray.flatMap { Service(json: $0) }
                     success(services)
-                    
                 }
                 if response.result.isFailure {
                     let error = response.result.error
                     failure(error)
                 }
-                
         }
-        
     }
     
+    func getContact(success:@escaping (Contact) -> Void, failure:@escaping (Error?) -> Void){
+        let strURL = Default.serverApi + "/api/v1/contacts"
+        Alamofire.request(strURL,
+                          method: .get,
+                          parameters: nil,
+                          encoding: URLEncoding.default,
+                          headers: nil)
+            .responseJSON { (response) -> Void in
+                if response.result.isSuccess {
+                    guard let value = response.result.value as? [String: Any],
+                            let contact = Contact.init(json: value) else { return
+                    }
+                    success(contact)
+                }
+                if response.result.isFailure {
+                    let error = response.result.error
+                    failure(error)
+                }
+        }
+    }
+    func sendReportToServer(){
+        
+    }
     
 }

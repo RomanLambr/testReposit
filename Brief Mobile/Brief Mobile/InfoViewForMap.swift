@@ -9,10 +9,5 @@
 import UIKit
 
 class InfoViewForMap: UIView {
-
-    
-    
-    
-    
     
 }
