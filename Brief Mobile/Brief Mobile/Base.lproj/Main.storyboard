@@ -358,12 +358,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Attachments" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GyP-AI-ioC">
-                                <rect key="frame" x="139" y="318" width="98" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BXr-4B-fHO">
                                 <rect key="frame" x="16" y="144" width="343" height="30"/>
                                 <nil key="textColor"/>
@@ -478,6 +472,9 @@
                                 <state key="normal" title="REPORT ACCIDENT">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="sendReportToServer:" destination="3LE-oG-ajW" eventType="touchUpInside" id="L7n-Bw-opq"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I Agree" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ows-Gk-nbb">
                                 <rect key="frame" x="16" y="588" width="54" height="21"/>
@@ -485,6 +482,15 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Attachments" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GyP-AI-ioC">
+                                <rect key="frame" x="139" y="298" width="98" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" misplaced="YES" progressViewStyle="bar" progress="0.59999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="Tbq-Cz-EbR">
+                                <rect key="frame" x="16" y="652" width="343" height="2.5"/>
+                            </progressView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -507,10 +513,13 @@
                             <constraint firstItem="W9l-jx-fnF" firstAttribute="trailing" secondItem="7Ox-RY-9CO" secondAttribute="trailingMargin" id="Smw-kT-1pB"/>
                             <constraint firstItem="gbD-gw-LL7" firstAttribute="top" secondItem="Yhu-ZP-sBO" secondAttribute="bottom" constant="24" id="X2A-qG-KFy"/>
                             <constraint firstItem="Bbd-SC-QLI" firstAttribute="centerX" secondItem="7Ox-RY-9CO" secondAttribute="centerX" id="XUE-hG-28n"/>
+                            <constraint firstItem="tZf-ec-QtW" firstAttribute="top" secondItem="Tbq-Cz-EbR" secondAttribute="bottom" constant="16" id="YBM-WH-tdU"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Tbq-Cz-EbR" secondAttribute="trailing" id="Zc1-6n-d5C"/>
                             <constraint firstItem="Ows-Gk-nbb" firstAttribute="centerY" secondItem="W9l-jx-fnF" secondAttribute="centerY" id="brc-6W-S8D"/>
                             <constraint firstItem="GyP-AI-ioC" firstAttribute="top" secondItem="gbD-gw-LL7" secondAttribute="bottom" constant="36" id="hGE-yq-lfV"/>
                             <constraint firstItem="gbD-gw-LL7" firstAttribute="leading" secondItem="7Ox-RY-9CO" secondAttribute="leadingMargin" id="jTY-C6-cic"/>
                             <constraint firstItem="BXr-4B-fHO" firstAttribute="leading" secondItem="7Ox-RY-9CO" secondAttribute="leading" constant="16" id="tRx-bN-MLY"/>
+                            <constraint firstItem="Tbq-Cz-EbR" firstAttribute="leading" secondItem="7Ox-RY-9CO" secondAttribute="leadingMargin" id="yPs-L9-hIb"/>
                         </constraints>
                     </view>
                     <connections>
@@ -519,6 +528,7 @@
                         <outlet property="conformButton" destination="Zct-gJ-Phl" id="CLA-b3-YmB"/>
                         <outlet property="isAgreeSwitch" destination="W9l-jx-fnF" id="bza-EV-ZnC"/>
                         <outlet property="nameTextField" destination="BXr-4B-fHO" id="b2H-SI-Hcu"/>
+                        <outlet property="progressView" destination="Tbq-Cz-EbR" id="U1k-aW-ASX"/>
                         <outlet property="telTextField" destination="gbD-gw-LL7" id="xdA-wg-nCB"/>
                     </connections>
                 </viewController>

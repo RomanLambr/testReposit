@@ -29,6 +29,7 @@ class AccidentReportViewController: UIViewController, UINavigationControllerDele
     @IBOutlet weak var telTextField: UITextField!
     @IBOutlet weak var isAgreeSwitch: UISwitch!
     @IBOutlet weak var conformButton: UIButton!
+    @IBOutlet var progressView: UIProgressView!
     
     //MARK: - Properties
     var width : CGFloat?
@@ -133,9 +134,25 @@ class AccidentReportViewController: UIViewController, UINavigationControllerDele
         return (textField.text?.characters.count)! < length
         
     }
-
     
     //MARK: - Action Photo
+    @IBAction func sendReportToServer(_ sender: Any) {
+        let request = AccidentRequest(name: nameTextField.text, regNumber: carRegTextField.text, phoneNumber: telTextField.text)
+        conformButton.isEnabled = false
+        progressView.progress = 0.0
+        progressView.isHidden = false
+        //activityIndicatorView.startAnimating()
+        ServerManager.shared.sendReportToServer( request: request, images: imageArray, success: {[weak self] (response) in
+            Default.showAlertMessage(vc: self!, titleStr: "Success", messageStr: "")
+            self?.conformButton.isEnabled = true
+            self?.progressView.isHidden = true
+        }, failure: { [weak self](error) in
+            Default.showAlertMessage(vc: self!, titleStr: "Error", messageStr: "")
+        }, progressValue: {[weak self] (progress) in
+            self?.progressView.setProgress(progress, animated: true)
+        })
+    }
+    
     
     @IBAction func deletePhoto(_ sender: UIButton) {
         self.imageArray.remove(at: sender.tag)
@@ -258,6 +275,8 @@ extension AccidentReportViewController: UITextFieldDelegate {
         conformButton.alpha = isValid ? 1.0 : 0.5
         conformButton.isEnabled = isValid
     }
+    
+    
 }
 
 //MARK: - UIImagePickerControllerDelegate
@@ -274,4 +293,6 @@ extension AccidentReportViewController:UIImagePickerControllerDelegate{
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
+    
+    
 }

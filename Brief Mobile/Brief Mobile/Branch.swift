@@ -22,7 +22,7 @@ struct Branch {
     var position    :CLLocationCoordinate2D{
         return CLLocationCoordinate2D(latitude: latitude , longitude: longitude)
     }
-        
+    
     init?(json: [String: Any]) {
         guard let id        = json["id"] as? Int,
             let title       = json["title"] as? String,

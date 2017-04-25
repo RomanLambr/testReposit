@@ -145,8 +145,37 @@ class ServerManager {
                 }
         }
     }
-    func sendReportToServer(){
+    //MARK: - Post Method
         
+    func sendReportToServer (request : AccidentRequest , images : [UIImage], success: @escaping (Any?) -> Void, failure: @escaping (Error?) -> Void, progressValue: @escaping (Float) -> Void) {
+        let parameters = request.dictionaryRepresent()
+        let strURL = Default.serverApi + "/api/v1/accident_reports"
+        
+        Alamofire.upload(
+            multipartFormData: { multipartFormData in
+                for (key,value) in parameters {
+                    multipartFormData.append((value as AnyObject).data(using: String.Encoding.utf8.rawValue)!, withName: key)
+                }
+                for (index,image) in images.enumerated() {
+                    if  let imageData = UIImageJPEGRepresentation(image, 1) {
+                        multipartFormData.append(imageData, withName: "image\(index)", fileName: "image\(index).jpeg", mimeType: "image\(index)/jpeg")
+                    }
+                }
+        },
+            to: strURL,
+            encodingCompletion: { encodingResult in
+                switch encodingResult {
+                case .success(let upload, _, _):
+                    upload.uploadProgress {  progress in
+                        progressValue(Float(progress.fractionCompleted))
+                    }
+                    upload.responseJSON {  response in
+                        success(response.result.value)
+                    }
+                case .failure(let encodingError):
+                        failure(encodingError)
+                        print(encodingError)
+                    }
+        } )
     }
-    
 }
